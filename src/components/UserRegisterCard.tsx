@@ -8,8 +8,14 @@ export default function UserRegisterCard({
   registrant,
 }: UserRegisterCardProps) {
   // registrant.gender === "male"   -> "👨 Male"
-  // registrant.gender === "female" -> "👩 Female"
-  const genderLabel = registrant.gender === "male" ? "👨 Male" : "👩 Female";
+  //registrant.gender === "female" -> "👩 Female"
+  const items = registrant.extraItems ?? [];
+  const genderLabel =
+    registrant.gender === "male"
+      ? "👨 Male"
+      : registrant.gender === "female"
+      ? "👩 Female"
+      : "";
 
   return (
     <div className="card p-3 mb-3">
@@ -20,7 +26,7 @@ export default function UserRegisterCard({
             {registrant.plan} · {genderLabel}
           </div>
           <div className="d-flex flex-wrap gap-2">
-            {registrant.items.map((item) => (
+            {items.map((item) => (
               <span key={item} className="badge border text-dark bg-light">
                 {item}
               </span>

@@ -17,7 +17,12 @@ const extraItems = [
 
 const STORAGE_KEY = "registrants";
 
-export default function ModalRegister() {
+interface ModalRegisterProps {
+  show: boolean;
+  onClose: () => void;
+}
+
+export default function ModalRegister({ show, onClose }: ModalRegisterProps) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [plan, setPlan] = useState("");
@@ -60,6 +65,11 @@ export default function ModalRegister() {
     });
   };
 
+  const handleClose = () => {
+    resetForm();
+    onClose();
+  };
+
   const handleRegister = () => {
     const newErrors = {
       firstName: firstName.trim() === "",
@@ -74,8 +84,8 @@ export default function ModalRegister() {
       id: Date.now(),
       fullName: `${firstName.trim()} ${lastName.trim()}`,
       gender: gender,
-      plan: plans.find((p) => p.id === plan)!.label,
-      items: extraItems
+      plan: plans.find((p) => p.id === plan)?.label ?? "-",
+      extraItems: extraItems
         .filter((item) => selectedItems.includes(item.id))
         .map((item) => item.label),
       total: total,
@@ -89,15 +99,16 @@ export default function ModalRegister() {
     alert(
       `Registration complete. Please pay money for ${total.toLocaleString()} THB.`
     );
-    resetForm();
+    handleClose();
   };
+
+  if (!show) return null;
 
   return (
     <div
-      className="modal fade"
+      className="modal fade show d-block"
       id="modalregister"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       tabIndex={-1}
       aria-labelledby="modalregisterLabel"
       aria-hidden="true"
@@ -109,9 +120,8 @@ export default function ModalRegister() {
             <button
               type="button"
               className="btn-close"
-              data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={resetForm}
+              onClick={handleClose}
             ></button>
           </div>
 
