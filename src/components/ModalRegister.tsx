@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { Registrant } from "../libs/Registrant";
 
 //---- แผนการวิ่ง ----
@@ -25,7 +25,6 @@ export default function ModalRegister() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [agree, setAgree] = useState(false);
 
-  // เก็บสถานะ error ของแต่ละช่อง (สำหรับข้อ 1.1 และ 1.2)
   const [errors, setErrors] = useState({
     firstName: false,
     lastName: false,
@@ -33,9 +32,6 @@ export default function ModalRegister() {
     gender: false,
   });
 
-  const closeBtnRef = useRef<HTMLButtonElement>(null);
-
-  // ---- คำนวณราคาแบบ realtime (ข้อ 2.1, 2.2) ----
   const planPrice = plans.find((p) => p.id === plan)?.price ?? 0;
   const itemsPrice = extraItems
     .filter((item) => selectedItems.includes(item.id))
@@ -85,7 +81,6 @@ export default function ModalRegister() {
       total: total,
     };
 
-    // ---- บันทึกลง LocalStorage ----
     const stored = localStorage.getItem(STORAGE_KEY);
     const registrants: Registrant[] = stored ? JSON.parse(stored) : [];
     registrants.push(registrant);
@@ -95,7 +90,6 @@ export default function ModalRegister() {
       `Registration complete. Please pay money for ${total.toLocaleString()} THB.`
     );
     resetForm();
-    closeBtnRef.current?.click();
   };
 
   return (
@@ -117,7 +111,6 @@ export default function ModalRegister() {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              ref={closeBtnRef}
               onClick={resetForm}
             ></button>
           </div>

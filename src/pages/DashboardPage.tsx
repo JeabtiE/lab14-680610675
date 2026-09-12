@@ -5,7 +5,6 @@ import type { Registrant } from "../libs/Registrant";
 const STORAGE_KEY = "registrants";
 
 export default function DashboardPage() {
-  // ---- ดึงข้อมูลผู้ลงทะเบียนทั้งหมดจาก LocalStorage ----
   const [registrants] = useState<Registrant[]>(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     return stored ? (JSON.parse(stored) as Registrant[]) : [];
@@ -19,7 +18,7 @@ export default function DashboardPage() {
         <p className="fw-bold text-secondary">ยังไม่มีผู้ลงทะเบียน</p>
       ) : (
         <>
-          <p className="fw-bold text-primary">
+          <p className="fw-bold text-secondary">
             ผู้ลงทะเบียนแล้ว ({registrants.length} คน)
           </p>
           {registrants.map((registrant) => (

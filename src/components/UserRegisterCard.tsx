@@ -15,7 +15,7 @@ export default function UserRegisterCard({
     <div className="card p-3 mb-3">
       <div className="d-flex justify-content-between align-items-start">
         <div>
-          <h6 className="fw-bold text-primary mb-1">{registrant.fullName}</h6>
+          <h6 className="fw-bold text-dark mb-1">{registrant.fullName}</h6>
           <div className="small text-secondary mb-2">
             {registrant.plan} · {genderLabel}
           </div>
@@ -27,7 +27,7 @@ export default function UserRegisterCard({
             ))}
           </div>
         </div>
-        <div className="fw-bold text-primary text-nowrap">
+        <div className="fw-bold text-dark text-nowrap">
           {registrant.total.toLocaleString()} THB
         </div>
       </div>
