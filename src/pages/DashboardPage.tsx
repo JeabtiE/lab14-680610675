@@ -15,7 +15,7 @@ export default function DashboardPage() {
       <h2>Dashboard</h2>
       {/* Conditional Rendering + Render Component */}
       {registrants.length === 0 ? (
-        <p className="fw-bold text-secondary">ยังไม่มีผู้ลงทะเบียน</p>
+        <p className="text-secondary-emphasis">ยังไม่มีผู้ลงทะเบียน</p>
       ) : (
         <>
           <p className="text-secondary">
