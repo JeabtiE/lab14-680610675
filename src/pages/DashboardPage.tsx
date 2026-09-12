@@ -18,7 +18,7 @@ export default function DashboardPage() {
         <p className="fw-bold text-secondary">ยังไม่มีผู้ลงทะเบียน</p>
       ) : (
         <>
-          <p className="fw-bold text-secondary">
+          <p className="text-secondary">
             ผู้ลงทะเบียนแล้ว ({registrants.length} คน)
           </p>
           {registrants.map((registrant) => (
